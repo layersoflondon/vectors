@@ -9,6 +9,8 @@ exit_abnormal() {
   exit 1
 }
 
+DOCKER="docker run -ti --rm -v $(pwd):/data klokantech/gdal"
+
 while getopts "i:o:" options; do
 	case "${options}" in
 		i)
@@ -30,6 +32,6 @@ done
 
 
 for i in `ogrinfo -ro -so -q ${FILENAME} | cut -d ' ' -f 2`; do
-	# echo $i
-	ogr2ogr -f "GeoJSON" "${OUTPUT_PATH}/${i}.json" $FILENAME "${i}"
+	echo $i;
+	$DOCKER ogr2ogr -f "GeoJSON" "${OUTPUT_PATH}/${i}.json" $FILENAME "${i}"
 done
