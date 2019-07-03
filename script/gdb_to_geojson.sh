@@ -33,5 +33,5 @@ done
 
 for i in `ogrinfo -ro -so -q ${FILENAME} | cut -d ' ' -f 2`; do
 	echo $i;
-	$DOCKER ogr2ogr -f "GeoJSON" "${OUTPUT_PATH}/${i}.json" $FILENAME "${i}"
+	$DOCKER ogr2ogr -f "FileGDB" "${OUTPUT_PATH}/${i}.gdb" $FILENAME "${i}"
 done
